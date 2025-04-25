@@ -1,0 +1,231 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% kaobook
+% LaTeX Template
+% Version 1.3 (December 9, 2021)
+%
+% This template originates from:
+% https://www.LaTeXTemplates.com
+%
+% For the latest template development version and to make contributions:
+% https://github.com/fmarotta/kaobook
+%
+% Authors:
+% Federico Marotta (federicomarotta@mail.com)
+% Based on the doctoral thesis of Ken Arroyo Ohori (https://3d.bk.tudelft.nl/ken/en)
+% and on the Tufte-LaTeX class.
+% Modified for LaTeX Templates by Vel (vel@latextemplates.com)
+%
+% License:
+% CC0 1.0 Universal (see included MANIFEST.md file)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\documentclass[
+	letterpaper, % Page size
+	fontsize=10pt, % Base font size
+	twoside=true, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
+	%open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
+	%chapterentrydots=true, % Uncomment to output dots from the chapter name to the page number in the table of contents
+	numbers=noenddot, % Comment to output dots after chapter numbers; the most common values for this option are: enddot, noenddot and auto (see the KOMAScript documentation for an in-depth explanation)
+]{kaobook}
+
+% Choose the language
+\usepackage[french]{babel} % Load characters and hyphenation
+\usepackage[french=guillemets]{csquotes}	% French quotes
+
+% Load packages for testing
+%\usepackage{blindtext}
+%\usepackage{showframe} % Uncomment to show boxes around the text area, margin, header and footer
+%\usepackage{showlabels} % Uncomment to output the content of \label commands to the document where they are used
+
+% Load the bibliography package
+\usepackage[language=french, backend=biber, bibstyle=numeric-verb, sorting=rymdnt]{kaobiblio}
+\DeclareSortingTemplate{rymdnt}{
+  \sort[direction=ascending]{%
+    \field{year}%
+  }
+  \sort[direction=ascending]{%
+    \field{month}%
+  }
+  \sort[direction=ascending]{%
+    \field{day}%
+  }
+  \sort[direction=ascending]{%
+    \field{author}%
+  }
+  \sort[direction=ascending]{%
+    \field{title}%
+  }
+}
+\renewbibmacro{in:}{ dans: }
+
+% Add bibliography file
+\addbibresource{main.bib}
+
+% Load mathematical packages for theorems and related environments
+%\usepackage[framed=true]{kaotheorems}
+
+% Load the package for hyperreferences
+%\usepackage{kaorefs}
+%\graphicspath{{examples/documentation/images/}{images/}} % Paths in which to look for images
+
+\makeindex[columns=3, title=Alphabetical Index, intoc] % Make LaTeX produce the files required to compile the index
+
+\usepackage{glossaries}
+
+\input{glossary.tex} % Include the glossary definitions
+\makeglossaries % Make LaTeX produce the files required to compile the glossary
+
+% Reset sidenote counter at chapters
+%\counterwithin*{sidenote}{chapter}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	BOOK INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{Test}
+\subtitle{De 1973 à 2023}
+
+\author{Me}
+
+\date{\today}
+
+\publishers{Publisher}
+%----------------------------------------------------------------------------------------
+
+\frontmatter % Denotes the start of the pre-document content, uses roman numerals
+
+%----------------------------------------------------------------------------------------
+%	OPENING PAGE
+%----------------------------------------------------------------------------------------
+
+%\makeatletter
+%\extratitle{
+%	% In the title page, the title is vspaced by 9.5\baselineskip
+%	\vspace*{9\baselineskip}
+%	\vspace*{\parskip}
+%	\begin{center}
+%		% In the title page, \huge is set after the komafont for title
+%		\usekomafont{title}\huge\@title
+%	\end{center}
+%}
+%\makeatother
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+\makeatletter
+
+\lowertitleback{
+	\textbf{Avertissement}\\
+	Boo.
+	
+	\medskip
+	
+	\textbf{Publisher} \\
+	Imprimé pour la première fois en septembre 2025 par l'\@publishers
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	DEDICATION
+%----------------------------------------------------------------------------------------
+
+\dedication{
+	The harmony of the world is made manifest in Form and Number, and the heart and soul and all the poetry of Natural Philosophy are embodied in the concept of mathematical beauty.\\
+	\flushright -- D'Arcy Wentworth Thompson
+}
+
+%----------------------------------------------------------------------------------------
+%	OUTPUT TITLE PAGE AND PREVIOUS
+%----------------------------------------------------------------------------------------
+
+% Note that \maketitle outputs the pages before here
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS & LIST OF FIGURES/TABLES
+%----------------------------------------------------------------------------------------
+
+\begingroup % Local scope for the following commands
+
+% Define the style for the TOC, LOF, and LOT
+%\setstretch{1} % Uncomment to modify line spacing in the ToC
+%\hypersetup{linkcolor=blue} % Uncomment to set the colour of links in the ToC
+\setlength{\textheight}{230\hscale} % Manually adjust the height of the ToC pages
+
+% Turn on compatibility mode for the etoc package
+\etocclasstocstyle % "toc display" as if etoc was not loaded
+\etocstandardlines % "toc lines" as if etoc was not loaded
+
+\tableofcontents % Output the table of contents
+
+%\listoffigures % Output the list of figures
+
+% Comment both of the following lines to have the LOF and the LOT on different pages
+%\let\cleardoublepage\bigskip
+%\let\clearpage\bigskip
+
+%\listoftables % Output the list of tables
+
+\endgroup
+
+%----------------------------------------------------------------------------------------
+%	MAIN BODY
+%----------------------------------------------------------------------------------------
+
+\mainmatter % Denotes the start of the main document content, resets page numbering and uses arabic numbers
+\setchapterstyle{kao} % Choose the default chapter heading style
+
+%----------------------------------------------------------------------------------------
+
+\backmatter % Denotes the end of the main document content
+\setchapterstyle{plain} % Output plain chapters from this point onwards
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+% The bibliography needs to be compiled with biber using your LaTeX editor, or on the command line with 'biber main' from the template directory
+
+\printbibliography[heading=bibintoc, title=Bibliographie] % Add the bibliography heading to the ToC, set the title of the bibliography and output the bibliography note
+
+%----------------------------------------------------------------------------------------
+%	GLOSSARY
+%----------------------------------------------------------------------------------------
+
+% The glossary needs to be compiled on the command line with 'makeglossaries main' from the template directory
+\printglossary
+
+%----------------------------------------------------------------------------------------
+%	INDEX
+%----------------------------------------------------------------------------------------
+
+% The index needs to be compiled on the command line with 'makeindex main' from the template directory
+
+\printindex % Output the index
+
+%----------------------------------------------------------------------------------------
+%	BACK COVER
+%----------------------------------------------------------------------------------------
+
+% If you have a PDF/image file that you want to use as a back cover, uncomment the following lines
+
+%\clearpage
+%\thispagestyle{empty}
+%\null%
+%\clearpage
+%\includepdf{cover-back.pdf}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
